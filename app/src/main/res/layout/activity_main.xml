@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/text_primary"
+            android:textSize="23sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/app_subtitle"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/status_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <TextView android:id="@+id/row_overlay" style="@style/StatusRow" />
+            <TextView android:id="@+id/row_notify" style="@style/StatusRow" />
+            <TextView android:id="@+id/row_battery" style="@style/StatusRow" />
+            <TextView android:id="@+id/row_pet" style="@style/StatusRow" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_battery"
+            style="@style/CardButton"
+            android:text="@string/btn_battery" />
+
+        <Button
+            android:id="@+id/btn_pet"
+            style="@style/CardButton"
+            android:text="@string/btn_start" />
+
+        <Button
+            android:id="@+id/btn_settings"
+            style="@style/CardButton"
+            android:text="@string/btn_settings" />
+
+        <TextView style="@style/SectionTitle" android:text="@string/section_usage" />
+
+        <TextView
+            android:id="@+id/text_usage"
+            style="@style/SectionBody"
+            android:text="@string/usage_body" />
+
+        <TextView
+            style="@style/SectionTitle"
+            android:layout_marginTop="22dp"
+            android:text="@string/section_notice" />
+
+        <TextView
+            android:id="@+id/text_notice"
+            style="@style/SectionBody"
+            android:text="@string/notice_body" />
+    </LinearLayout>
+</ScrollView>

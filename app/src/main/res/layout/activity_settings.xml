@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            style="@style/FieldLabel"
+            android:layout_marginTop="0dp"
+            android:text="@string/label_api_key" />
+
+        <EditText
+            android:id="@+id/input_key"
+            style="@style/FieldInput"
+            android:hint="@string/hint_api_key"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <TextView style="@style/FieldLabel" android:text="@string/label_refresh" />
+
+        <EditText
+            android:id="@+id/input_refresh"
+            style="@style/FieldInput"
+            android:inputType="number"
+            android:singleLine="true" />
+
+        <TextView style="@style/FieldLabel" android:text="@string/label_threshold" />
+
+        <EditText
+            android:id="@+id/input_threshold"
+            style="@style/FieldInput"
+            android:inputType="numberDecimal"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/label_scale_value"
+            style="@style/FieldLabel"
+            android:text="@string/label_scale" />
+
+        <SeekBar
+            android:id="@+id/seek_scale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:max="19" />
+
+        <TextView
+            style="@style/FieldLabel"
+            android:text="@string/label_peak" />
+
+        <RadioGroup
+            android:id="@+id/group_peak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_peak_default"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/peak_default"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_peak_liangwen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/peak_liangwen"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_peak_qiangqiang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/peak_qiangqiang"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <CheckBox
+            android:id="@+id/check_bubble"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_show_bubble"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/check_hide_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_hide_menu"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_hide_menu"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/check_auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_auto_start"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/check_sound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_sound_on"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_save"
+            style="@style/CardButton"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/bg_button"
+            android:text="@string/btn_save" />
+
+        <Button
+            android:id="@+id/btn_test"
+            style="@style/CardButton"
+            android:text="@string/btn_test" />
+
+        <Button
+            android:id="@+id/btn_sys"
+            style="@style/CardButton"
+            android:text="@string/btn_sys_settings" />
+
+        <TextView
+            android:id="@+id/text_result"
+            style="@style/SectionBody"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="page_bg">#FFF4F5F8</color>
+    <color name="card_bg">#FFFFFFFF</color>
+    <color name="text_primary">#FF1B1B1F</color>
+    <color name="text_secondary">#FF7A7F8C</color>
+    <color name="accent">#FF4D6BFE</color>
+    <color name="btn_bg">#FFE9EBF0</color>
+    <color name="btn_bg_pressed">#FFD8DCE5</color>
+    <color name="divider">#FFE6E8EF</color>
+</resources>

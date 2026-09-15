@@ -146,8 +146,38 @@ public final class Prefs {
     public static void setHideMenu(Context c, boolean v) {
         of(c).edit().putBoolean("hide_menu", v).apply();
     }
+    // ---- 吸附与翻转（0.3.0 跟进） ----
+
+    /** 吸附贴边后离屏幕边缘的距离（dp，0~200）。 */
+    public static int snapEdgeDp(Context c) {
+        return Math.max(0, Math.min(200, of(c).getInt("snap_edge_dp", 0)));
+    }
+
+    public static void setSnapEdgeDp(Context c, int v) {
+        of(c).edit().putInt("snap_edge_dp", Math.max(0, Math.min(200, v))).apply();
+    }
+
+    /** 贴左时是否水平镜像翻转（关掉则立绘始终朝右）。 */
+    public static boolean mirrorLeft(Context c) {
+        return of(c).getBoolean("mirror_left", true);
+    }
+
+    public static void setMirrorLeft(Context c, boolean v) {
+        of(c).edit().putBoolean("mirror_left", v).apply();
+    }
+
+    // ---- 点按角色推进泡泡队列（0.3.0 跟进） ----
+
+    public static boolean tapAdvance(Context c) {
+        return of(c).getBoolean("tap_advance", false);
+    }
+
+    public static void setTapAdvance(Context c, boolean v) {
+        of(c).edit().putBoolean("tap_advance", v).apply();
+    }
 
     // ---- 位置 ----
+
 
     public static int posX(Context c) {
         return of(c).getInt("pos_x", -1);

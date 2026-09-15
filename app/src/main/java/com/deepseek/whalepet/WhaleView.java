@@ -128,6 +128,8 @@ public class WhaleView extends View {
     private volatile boolean regionDirty = true;
     private boolean insetsHooked;
     private boolean hideMenuButton;
+    /** 点按角色推进泡泡队列（0.3.0）；false 时保持原「点一下刷新/收回」行为。 */
+    private boolean tapAdvance;
 
     private final Runnable breathRunnable = new Runnable() {
         @Override
@@ -452,6 +454,11 @@ public class WhaleView extends View {
         hideMenuButton = hidden;
         invalidate();
         notifyGeometry();
+    }
+
+    /** 点按角色推进泡泡队列开关（0.3.0）。 */
+    public void setTapAdvance(boolean on) {
+        tapAdvance = on;
     }
 
     public void setMirrored(boolean mirrored) {
@@ -842,6 +849,17 @@ public class WhaleView extends View {
                         // 生气台词停留期内：继续点击不收回，并把停留时间往后顺延
                         comboQuoteUntil = System.currentTimeMillis() + COMBO_HOLD_MS;
                         restartBubbleTimer(COMBO_HOLD_MS);
+                    } else if (tapAdvance) {
+                        // 0.3.0：点按角色推进泡泡队列（不再走「刷新/收回」）
+                        sfx.pet();
+                        boolean closed = bubble.advanceQueue();
+                        if (closed) {
+                            handler.removeCallbacks(bubbleHideRunnable);
+                        } else {
+                            restartBubbleTimer();
+                        }
+                        invalidate();
+                        notifyGeometry();
                     } else {
                         sfx.pet();
                         controller.onPetTap();

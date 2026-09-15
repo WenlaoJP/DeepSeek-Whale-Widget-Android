@@ -34,6 +34,11 @@
     <string name="label_sound_on">音效（摸头 / 连戳）</string>
     <string name="label_hide_menu">隐藏菜单按钮（三条杠）</string>
     <string name="hint_hide_menu">隐藏后长按小鲸鱼依旧可以打开菜单</string>
+    <string name="label_snap_edge">吸附离边距离（dp）</string>
+    <string name="hint_snap_edge">0 = 紧贴边缘；调大让小鲸鱼离屏幕边远一点</string>
+    <string name="label_mirror_left">贴左时水平镜像翻转</string>
+    <string name="label_tap_advance">点按角色推进泡泡队列</string>
+    <string name="hint_tap_advance">开启后：点小鲸鱼＝看下一句台词，走到最后再点收起，下次从头开始</string>
     <string name="label_auto_start">开机自动启动小鲸鱼</string>
     <string name="btn_save">保存并应用</string>
     <string name="btn_test">测试连接</string>

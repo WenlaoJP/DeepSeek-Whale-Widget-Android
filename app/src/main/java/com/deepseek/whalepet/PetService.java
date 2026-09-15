@@ -132,6 +132,7 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
             onScale(want);
         }
         petView.setHideMenuButton(Prefs.hideMenu(this));
+        petView.setTapAdvance(Prefs.tapAdvance(this));
         if (!Prefs.showBubble(this)) {
             petView.closeBubble();
         } else {
@@ -211,6 +212,7 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
         }
         petView = new WhaleView(this, Prefs.scale(this));
         petView.setHideMenuButton(Prefs.hideMenu(this));
+        petView.setTapAdvance(Prefs.tapAdvance(this));
         petView.setController(this);
         petParams = new WindowManager.LayoutParams(
                 WindowManager.LayoutParams.WRAP_CONTENT,
@@ -282,7 +284,8 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
             return;
         }
         int w = Math.max(petView.getWidth(), 1);
-        petView.setMirrored(petParams.x + w / 2 < screenWidth() / 2);
+        boolean onLeft = petParams.x + w / 2 < screenWidth() / 2;
+        petView.setMirrored(Prefs.mirrorLeft(this) && onLeft);
     }
 
     private void updateView(android.view.View view, WindowManager.LayoutParams params) {
@@ -628,20 +631,24 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
         int h = Math.max(petView.getHeight(), 1);
         int screenW = screenWidth();
         int screenH = screenHeight();
+        // 离边距离可自定义（0.3.0）
+        int edge = dp(Prefs.snapEdgeDp(this));
 
         // 四边 1/4、3/4 吸附
         int cx = petParams.x + w / 2;
         if (cx < screenW / 4) {
-            petParams.x = 0;
+            petParams.x = edge;
         } else if (cx > screenW * 3 / 4) {
-            petParams.x = Math.max(0, screenW - w);
+            petParams.x = screenW - w - edge;
         }
         int cy = petParams.y + h / 2;
         if (cy < screenH / 4) {
-            petParams.y = 0;
+            petParams.y = edge;
         } else if (cy > screenH * 3 / 4) {
-            petParams.y = Math.max(0, screenH - h);
+            petParams.y = screenH - h - edge;
         }
+        petParams.x = clamp(petParams.x, 0, Math.max(0, screenW - w));
+        petParams.y = clamp(petParams.y, 0, Math.max(0, screenH - h));
 
         updateView(petView, petParams);
         applyMirrorForPosition();

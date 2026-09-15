@@ -9,8 +9,8 @@ R8_JAR="${R8_JAR:-/root/dl/r8.jar}"
 PKG=com.deepseek.whalepet
 MIN_SDK=26
 TARGET_SDK=34
-VERSION_CODE=14
-VERSION_NAME=1.4.5
+VERSION_CODE=15
+VERSION_NAME=1.4.6
 
 OUT="$ROOT/build"
 rm -rf "$OUT"

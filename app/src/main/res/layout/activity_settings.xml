@@ -130,6 +130,39 @@
             android:textColor="@color/text_primary"
             android:textSize="14sp" />
 
+        <TextView style="@style/FieldLabel" android:text="@string/label_snap_edge" />
+
+        <EditText
+            android:id="@+id/input_snap_edge"
+            style="@style/FieldInput"
+            android:hint="@string/hint_snap_edge"
+            android:inputType="number"
+            android:singleLine="true" />
+
+        <CheckBox
+            android:id="@+id/check_mirror_left"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_mirror_left"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <CheckBox
+            android:id="@+id/check_tap_advance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/label_tap_advance"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_tap_advance"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp" />
+
         <Button
             android:id="@+id/btn_save"
             style="@style/CardButton"

@@ -264,6 +264,27 @@ public class BubblePainter {
         applyKey(key);
     }
 
+    /**点按角色推进泡泡队列（0.3.0）：收起态点一下=开新一轮第1项；展开态点一下=下一项；本轮到末尾后再点=收起。
+     * @return true 表示本次点按触发了收起（队列已走完，下次点按从第 1 项重新开始）。
+     */
+    public boolean advanceQueue() {
+        if (!open) {
+            plan.clear();
+            lastKey = "";
+            refillPlan();
+            open = true;
+            openAt = SystemClock.uptimeMillis();
+            showRandomLines();
+            return false;
+        }
+        if (plan.isEmpty()) {
+            close();
+            return true;
+        }
+        showRandomLines();
+        return false;
+    }
+
     /** 连戳生气：随机取一句。 */
     public String randomComboLine() {
         return COMBO[random.nextInt(COMBO.length)];

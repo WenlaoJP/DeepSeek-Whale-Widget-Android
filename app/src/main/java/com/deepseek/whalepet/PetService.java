@@ -140,7 +140,8 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
             openBubble();
         }
         if (menuView != null) {
-            menuView.sync(petView.getScale(), Prefs.peakMode(this), Prefs.showBubble(this), Prefs.soundOn(this));
+            menuView.sync(petView.getScale(), Prefs.peakMode(this), Prefs.showBubble(this), Prefs.soundOn(this),
+                    Prefs.mirrorLeft(this), Prefs.tapAdvance(this), Prefs.snapEdgeDp(this));
         }
         petView.invalidate();
     }
@@ -336,7 +337,8 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
                     PixelFormat.TRANSLUCENT);
             menuParams.gravity = Gravity.TOP | Gravity.START;
         }
-        menuView.sync(petView.getScale(), Prefs.peakMode(this), Prefs.showBubble(this), Prefs.soundOn(this));
+        menuView.sync(petView.getScale(), Prefs.peakMode(this), Prefs.showBubble(this), Prefs.soundOn(this),
+                Prefs.mirrorLeft(this), Prefs.tapAdvance(this), Prefs.snapEdgeDp(this));
         positionMenu();
         if (!menuShown) {
             try {
@@ -362,8 +364,8 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
         if (menuView == null || petView == null) {
             return;
         }
-        int menuW = Math.max(menuView.getMeasuredWidth(), dp(262f));
-        int menuH = Math.max(menuView.getMeasuredHeight(), dp(184f));
+        int menuW = Math.max(menuView.getMeasuredWidth(), dp(300f));
+        int menuH = Math.max(menuView.getMeasuredHeight(), dp(262f));
         int screenW = screenWidth();
         int screenH = screenHeight();
         int margin = dp(6);
@@ -418,7 +420,7 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
     public void onPeakMode(String mode) {
         Prefs.setPeakMode(this, mode);
         if (menuView != null) {
-            menuView.sync(petView == null ? 1.5f : petView.getScale(), Prefs.peakMode(this), Prefs.showBubble(this), Prefs.soundOn(this));
+            syncMenu();
         }
         pushState();
     }
@@ -427,7 +429,7 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
     public void onBubbleToggle(boolean on) {
         Prefs.setShowBubble(this, on);
         if (menuView != null) {
-            menuView.sync(petView == null ? 1.5f : petView.getScale(), Prefs.peakMode(this), on, Prefs.soundOn(this));
+            syncMenu();
         }
         if (!on && petView != null) {
             petView.closeBubble();
@@ -440,9 +442,39 @@ public class PetService extends Service implements WhaleView.Controller, WhaleMe
     public void onSoundToggle(boolean on) {
         Prefs.setSoundOn(this, on);
         if (menuView != null) {
-            menuView.sync(petView == null ? 1.5f : petView.getScale(),
-                    Prefs.peakMode(this), Prefs.showBubble(this), on);
+            syncMenu();
         }
+    }
+
+    /** 把当前所有配置同步给悬浮菜单。 */
+    private void syncMenu() {
+        if (menuView != null) {
+            menuView.sync(petView == null ? Prefs.scale(this) : petView.getScale(),
+                    Prefs.peakMode(this), Prefs.showBubble(this), Prefs.soundOn(this),
+                    Prefs.mirrorLeft(this), Prefs.tapAdvance(this), Prefs.snapEdgeDp(this));
+        }
+    }
+
+    @Override
+    public void onMirrorToggle(boolean on) {
+        Prefs.setMirrorLeft(this, on);
+        applyMirrorForPosition();
+        syncMenu();
+    }
+
+    @Override
+    public void onTapAdvanceToggle(boolean on) {
+        Prefs.setTapAdvance(this, on);
+        if (petView != null) {
+            petView.setTapAdvance(on);
+        }
+        syncMenu();
+    }
+
+    @Override
+    public void onSnapEdgeChange(int edgeDp) {
+        Prefs.setSnapEdgeDp(this, edgeDp);
+        syncMenu();
     }
 
     @Override

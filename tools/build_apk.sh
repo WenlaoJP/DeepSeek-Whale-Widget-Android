@@ -4,8 +4,10 @@
 set -e
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-ANDROID_JAR="${ANDROID_JAR:-/root/dl/p34/android-34-ext12/android.jar}"
-R8_JAR="${R8_JAR:-/root/dl/r8.jar}"
+SDK_BT="${ANDROID_BUILD_TOOLS:-/root/Coding/android-sdk/build-tools/36.0.0}"
+ANDROID_JAR="${ANDROID_JAR:-/root/Coding/android-sdk/platforms/android-35/android.jar}"
+R8_JAR="${R8_JAR:-$SDK_BT/lib/d8.jar}"
+export PATH="$SDK_BT:$PATH"
 PKG=com.deepseek.whalepet
 MIN_SDK=26
 TARGET_SDK=34
@@ -53,7 +55,12 @@ apk, dex = sys.argv[1], sys.argv[2]
 with zipfile.ZipFile(apk, 'a', zipfile.ZIP_DEFLATED) as z:
     z.write(dex, 'classes.dex')
 PYEOF
-zipalign -f -p 4 "$OUT/unsigned.apk" "$OUT/aligned.apk"
+if zipalign -f -p 4 "$OUT/unsigned.apk" "$OUT/aligned.apk" 2>/dev/null; then
+  :
+else
+  echo "    (native zipalign unavailable, fallback to python)"
+  python3 "$ROOT/tools/zipalign.py" 4 "$OUT/unsigned.apk" "$OUT/aligned.apk"
+fi
 
 echo "[6/6] 签名"
 KS="$ROOT/tools/debug.keystore"
